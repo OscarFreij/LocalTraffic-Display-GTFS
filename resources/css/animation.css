@@ -1,0 +1,63 @@
+.statusBox.alert[data-state]
+{
+    background: repeating-linear-gradient(
+        45deg,
+        #000,
+        #000 10px,
+        transparent 10px,
+        transparent 20px
+    );
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.statusBox.alert[data-state = "ontime"]
+{
+    background: #00aa00;
+}
+
+.statusBox.alert[data-state = "late"]
+{
+    background: yellow;
+}
+
+.statusBox.alert[data-state = "high"]
+{
+    animation-name: alert-high-animation;
+    animation-duration: 1s;
+}
+
+.statusBox.alert[data-state = "low"]
+{   
+    animation-name: alert-low-animation;
+    animation-duration: 2s;
+}
+
+.statusBox.alert[data-state = "canceled"]
+{
+    background-color: red;
+}
+
+.statusBox.alert[data-state = "departed"]
+{
+    display: none;
+}
+
+@keyframes alert-high-animation
+{
+    0%   {background-color: black;}
+    50%  {background-color: rgba(255, 128, 0, 1);}
+    100%   {background-color: black;}
+}
+
+@keyframes alert-low-animation
+{
+    0%   {background-color: black;}
+    50%  {background-color: rgb(255, 255, 0);}
+    100%   {background-color: black;}
+}
+
+.statusBox-content
+{
+    
+}
