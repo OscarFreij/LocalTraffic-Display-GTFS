@@ -16,7 +16,15 @@
     }
     else
     {
-        $planned = new DateTimeImmutable($stop_time->departure_time);
+        if (substr($stop_time->departure_time, 0, 2) > 23)
+        {
+            $newTime = (substr($stop_time->departure_time, 0, 2) - 24).(substr($stop_time->departure_time, 2));
+            $planned = new DateTimeImmutable($newTime);
+        }
+        else
+        {
+            $planned = new DateTimeImmutable($stop_time->departure_time);
+        }
     }
 
     $delay = $planned;
@@ -45,11 +53,11 @@
     {
         $state = "departed";
     }
-    else if ($timeDiff <= 5)
+    else if ($timeDiff <= 10)
     {
         $state = "high";
     }
-    else if ($timeDiff <= 10)
+    else if ($timeDiff <= 15)
     {
         $state = "low";
     }
