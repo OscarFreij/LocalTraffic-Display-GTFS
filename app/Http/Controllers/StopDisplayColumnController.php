@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Stop;
-use App\Models\Route;
 use App\Models\Stop_time;
 use App\Models\WorkerDataRetrieval;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Expr\Cast\Array_;
 
 class StopDisplayColumnController extends Controller
 {
@@ -20,8 +16,6 @@ class StopDisplayColumnController extends Controller
         $source_download_data = WorkerDataRetrieval::hydrate(DB::table('workerDataRetrievals')->where('type', '=', '1')->orderByDesc('id')->limit(1)->get()->toArray());
 
         //
-        $stop = Stop::where('stop_id', '=', $id)->firstOrFail();
-
         $timeP24 = (date('H')+23).":".date('i:s');
         $timeP0 = date('H:i:s');
         //$routesRAW = DB::table('stop_times')->distinct()->join('trips', 'trips.trip_id', '=', 'stop_times.trip_id')->join('routes', 'routes.route_id', '=', 'trips.route_id')->select(['routes.*','stop_times.stop_headsign'])->where('stop_times.stop_id','=', $id)->get();
