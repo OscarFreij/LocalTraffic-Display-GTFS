@@ -1,7 +1,8 @@
 import './bootstrap';
 
 
-var stopQue = ["9022001005031001", "9022001005031002"];
+
+//var stopQue = ["9021001005031000","9021001050392000","9021001050012000"];
 
 function LoadNewColumns()
 {
@@ -21,6 +22,6 @@ function LoadNewColumns()
 
 setInterval(() => {
     LoadNewColumns();
-}, 5000);
+}, 10000);
 
 LoadNewColumns();

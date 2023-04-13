@@ -20,21 +20,11 @@ use Illuminate\Http\Request;
 */
 
 
-Route::get('/', function () {
-    return view('app');
+Route::get('/{carousel_data}', function (string $carousel_data) {
+    return view('app', [
+        'carousel_data' => $carousel_data
+    ]);
 });
-
-Route::resource('/agency', AgencyController::class, [
-    'only' => ['index', 'show']
-]);
-
-Route::resource('/stop', StopController::class, [
-    'only' => ['index', 'show']
-]);
-
-Route::resource('/route', RouteController::class, [
-    'only' => ['index', 'show']
-]);
 
 Route::resource('/displayAPI', StopDisplayColumnController::class, [
     'only' => ['show']

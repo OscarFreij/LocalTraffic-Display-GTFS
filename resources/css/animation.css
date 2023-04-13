@@ -46,14 +46,14 @@
 @keyframes alert-high-animation
 {
     0%   {background-color: black;}
-    50%  {background-color: rgba(255, 128, 0, 1);}
+    50%  {background-color: orange;}
     100%   {background-color: black;}
 }
 
 @keyframes alert-low-animation
 {
     0%   {background-color: black;}
-    50%  {background-color: rgb(255, 255, 0);}
+    50%  {background-color: yellow;}
     100%   {background-color: black;}
 }
 

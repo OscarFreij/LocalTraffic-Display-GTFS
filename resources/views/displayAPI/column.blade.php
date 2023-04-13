@@ -1,6 +1,7 @@
 <div class="w-full">
     <h1 class="text-center text-4xl">{{$master_stop_data->stop_name}}</h1>
 </div>
+
 @foreach ($stop_times as $stop_time)
 @php
     if (substr($source_download_data->timestamp, 0, 10) == date('Y-m-d'))
@@ -32,16 +33,16 @@
 
     $delay = $planned;
     $now = new DateTimeImmutable(date('H:i:s'));
-    if ($stop_time->trip->TripUpdate_record != null)
+    if ($stop_time->rt_departure_time != null)
     {
-        foreach ($stop_time->trip->TripUpdate_record->TripUpdate_StopTimeUpdate as $stu) {
-            if ($stu->stop_id == $stop_time->stop_id) {
-                $delay = new DateTimeImmutable($stu->departure_time);
-                break;
-            }
-        }
+        $delay = new DateTimeImmutable($stop_time->rt_departure_time);
+        $interval = $delay->diff($now, false);
     }
-    $interval = $planned->diff($now, false);
+    else
+    {
+        $interval = $planned->diff($now, false);   
+    }
+
     $hours = $interval->format('%H');
     $minutes = $interval->format('%i');
 
