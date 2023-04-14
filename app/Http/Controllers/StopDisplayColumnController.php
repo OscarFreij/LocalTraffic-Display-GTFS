@@ -40,8 +40,7 @@ class StopDisplayColumnController extends Controller
                         ->whereNotNull('rt_departure_time');
                     })*/;
                 })
-                ->orderBy('departure_time')
-                ->orderBy('rt_departure_time')
+                ->orderByRaw('ifnull(rt_departure_time, departure_time)')
                 ->take(8)
                 ->get()
                 ->toArray();
@@ -59,8 +58,7 @@ class StopDisplayColumnController extends Controller
                         ->whereNotNull('rt_departure_time');
                     })*/;
                 })
-                ->orderBy('departure_time')
-                ->orderBy('rt_departure_time')
+                ->orderByRaw('ifnull(rt_departure_time, departure_time)')
                 ->take(8)
                 ->get()
                 ->toArray();
@@ -86,8 +84,7 @@ class StopDisplayColumnController extends Controller
                         ->whereNotNull('rt_departure_time');
                     })*/;
                 })
-                ->orderBy('departure_time')
-                ->orderBy('rt_departure_time')
+                ->orderByRaw('ifnull(rt_departure_time, departure_time)')
                 ->take(8)
                 ->get()
                 ->toArray();
@@ -104,8 +101,7 @@ class StopDisplayColumnController extends Controller
                         ->whereNotNull('rt_departure_time');
                     })*/;
                 })
-                ->orderBy('departure_time')
-                ->orderBy('rt_departure_time')
+                ->orderByRaw('ifnull(rt_departure_time, departure_time)')
                 ->take(8)
                 ->get()
                 ->toArray();
