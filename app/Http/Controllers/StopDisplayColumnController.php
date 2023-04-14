@@ -35,7 +35,10 @@ class StopDisplayColumnController extends Controller
                 ->where(function(Builder $query){
                     $timeP24 = (date('H')+24).":".(date('i:s'));
                     $query->where('departure_time', '>=', $timeP24)
-                    ->orWhere('rt_departure_time', '>=', strtotime('+1 day', time()));
+                    /*->orWhere(function(Builder $query){
+                        $query->where('rt_departure_time', '>=', strtotime('+1 day', time()))
+                        ->whereNotNull('rt_departure_time');
+                    })*/;
                 })
                 ->orderBy('departure_time')
                 ->orderBy('rt_departure_time')
@@ -51,7 +54,10 @@ class StopDisplayColumnController extends Controller
                 ->where(function(Builder $query){
                     $timeP0 = (date('H')).":".(date('i:s'));
                     $query->where('departure_time', '>=', $timeP0)
-                    ->orWhere('rt_departure_time', '>=', time());
+                    /*->orWhere(function(Builder $query){
+                        $query->where('rt_departure_time', '>=', time())
+                        ->whereNotNull('rt_departure_time');
+                    })*/;
                 })
                 ->orderBy('departure_time')
                 ->orderBy('rt_departure_time')
@@ -75,7 +81,10 @@ class StopDisplayColumnController extends Controller
                 ->where(function(Builder $query){
                     $timeP24 = (date('H')+24).":".(date('i:s'));
                     $query->where('departure_time', '>=', $timeP24)
-                    ->orWhere('rt_departure_time', '>=', strtotime('+1 day', time()));
+                    /*->orWhere(function(Builder $query){
+                        $query->where('rt_departure_time', '>=', strtotime('+1 day', time()))
+                        ->whereNotNull('rt_departure_time');
+                    })*/;
                 })
                 ->orderBy('departure_time')
                 ->orderBy('rt_departure_time')
@@ -90,7 +99,10 @@ class StopDisplayColumnController extends Controller
                 ->where(function(Builder $query){
                     $timeP0 = (date('H')).":".(date('i:s'));
                     $query->where('departure_time', '>=', $timeP0)
-                    ->orWhere('rt_departure_time', '>=', time());
+                    /*->orWhere(function(Builder $query){
+                        $query->where('rt_departure_time', '>=', time())
+                        ->whereNotNull('rt_departure_time');
+                    })*/;
                 })
                 ->orderBy('departure_time')
                 ->orderBy('rt_departure_time')
