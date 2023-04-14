@@ -6,7 +6,7 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/app.css',
-                'resources/css/animation.css',
+                'resources/css/statusBox.css',
                 'resources/js/app.js'
             ],
             refresh: true,

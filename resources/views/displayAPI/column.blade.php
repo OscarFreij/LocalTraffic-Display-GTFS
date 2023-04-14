@@ -60,18 +60,23 @@
     $plannedDepartureTime = $planned->format('H:i');
     $delayedDepartureTime = $delay->format('H:i');
 
-    $state = "ontime";
+    
+    if ($plannedDepartureTime == $delayedDepartureTime)
+    {
+        $state = "ontime";
+    }
+    else if ($plannedDepartureTime < $delayedDepartureTime)
+    {
+        $state = "late";
+    }
+    else if ($plannedDepartureTime > $delayedDepartureTime)
+    {
+        $state = "early";
+    }
+    
     if ($timeDiff < 0)
     {
         $state = "departed";
-    }
-    else if ($timeDiff <= 10)
-    {
-        $state = "high";
-    }
-    else if ($timeDiff <= 15)
-    {
-        $state = "low";
     }
 
     if ($timeDiff == 0)
@@ -81,16 +86,6 @@
     else {
         $timeDiff = $timeDiff." min";
     }
-
-    if ($plannedDepartureTime == $delayedDepartureTime)
-    {
-        $tripState = "On Time";
-    }
-    else
-    {
-        $tripState = "Delayed";
-    }
-
     
 @endphp
 <div class="statusBox alert pb-3 my-1" data-state="{{$state}}" style="">
@@ -107,7 +102,7 @@
         </span>
         </span>
         <span class="basis-3/12 text-center self-center">
-        @if ($tripState == "On Time")
+        @if ($state == "ontime")
             <span class="">{{$plannedDepartureTime}}</span>
         @else
             <span class="line-through">{{$plannedDepartureTime}}</span>&nbsp;-&nbsp;<span class="text-red-500">{{$delayedDepartureTime}}</span>
