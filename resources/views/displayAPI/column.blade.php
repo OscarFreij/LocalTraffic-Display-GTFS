@@ -74,16 +74,37 @@
         $state = "early";
     }
     
-    if ($timeDiff < 0)
+    if (isset($stop_time->trip_schedule_relationship))
+    {
+        if ($stop_time->trip_schedule_relationship == 3)
+        {
+            $state = "canceled";
+        }
+    }
+    
+    if (isset($stop_time->stop_time_schedule_relationship))
+    {
+        if ($stop_time->stop_time_schedule_relationship != 0)
+        {
+            $state = "canceled";
+        }
+    }
+
+    if ($stop_time->serviceAlertCancelled == 1)
+    {
+        $state = "cancelled";
+        $timeDiff = "Cancelled";
+    }
+    else if ($timeDiff < 0)
     {
         $state = "departed";
     }
-
-    if ($timeDiff == 0)
+    else if ($timeDiff == 0)
     {
         $timeDiff = "NOW";
     }
-    else {
+    else 
+    {
         $timeDiff = $timeDiff." min";
     }
     

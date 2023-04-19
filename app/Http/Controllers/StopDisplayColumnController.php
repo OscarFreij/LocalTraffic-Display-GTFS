@@ -26,6 +26,8 @@ class StopDisplayColumnController extends Controller
 
         $masterStop = Stop::find($id);
 
+        $selectionArray = ['stop_times.trip_id','stop_times.arrival_time','stop_times.rt_arrival_time','stop_times.departure_time','stop_times.rt_departure_time','stop_times.stop_id','stop_times.stop_headsign','trips.schedule_relationship as trip_schedule_relationship', 'stop_times.schedule_relationship as stop_time_schedule_relationship', 'trips.serviceAlertCancelled', 'trips.route_id', 'trips.service_id', 'trips.direction_id', 'calendar_dates.date'];
+
         if ($masterStop->location_type == 0)
         {
             $stop_times_earlyNEW = DB::table('stop_times')
@@ -44,6 +46,7 @@ class StopDisplayColumnController extends Controller
                     });
                 })
                 ->orderByRaw('ifnull(rt_departure_time, departure_time)')
+                ->select($selectionArray)
                 ->take(8)
                 ->get()
                 ->toArray();
@@ -63,6 +66,7 @@ class StopDisplayColumnController extends Controller
                     });
                 })
                 ->orderByRaw('ifnull(rt_departure_time, departure_time)')
+                ->select($selectionArray)
                 ->take(8)
                 ->get()
                 ->toArray();
@@ -91,9 +95,11 @@ class StopDisplayColumnController extends Controller
                     });
                 })
                 ->orderByRaw('ifnull(rt_departure_time, departure_time)')
+                ->select($selectionArray)
                 ->take(8)
                 ->get()
                 ->toArray();
+
             $stop_times_lateNEW = DB::table('stop_times')
                 ->whereIn('stop_times.stop_id',  $ids)
                 ->join('trips', 'trips.trip_id', '=', 'stop_times.trip_id')
@@ -109,6 +115,7 @@ class StopDisplayColumnController extends Controller
                     });
                 })
                 ->orderByRaw('ifnull(rt_departure_time, departure_time)')
+                ->select($selectionArray)
                 ->take(8)
                 ->get()
                 ->toArray();
@@ -121,6 +128,7 @@ class StopDisplayColumnController extends Controller
         //$stop_times_late = $stop->stop_time()->join('trips', 'trips.trip_id', '=', 'stop_times.trip_id')->join('calendar_dates', 'trips.service_id', '=', 'calendar_dates.service_id')->where('calendar_dates.date', '=', date('Ymd'))->where('departure_time', '>=', date('H:i:s'))->orderBy('departure_time')->limit(8)->get()->toArray();
 
         $stop_times = Stop_time::hydrate($stop_times_array);
+        //dd($stop_times);
         return view('displayAPI.column' , [
             'master_stop_data' => $masterStop,
             'source_download_data' => $source_download_data[0],

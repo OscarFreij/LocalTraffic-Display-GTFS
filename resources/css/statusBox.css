@@ -23,12 +23,13 @@
 {
     background: cyan;
 }
-.statusBox.alert[data-state = "canceled"]
+.statusBox.alert[data-state = "cancelled"]
 {
     background-color: red;
 }
 
 .statusBox.alert[data-state = "departed"]
 {
-    background-color: purple;
+    display: none;
+    /*background-color: purple;*/
 }
