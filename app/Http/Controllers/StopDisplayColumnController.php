@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Stop;
 use App\Models\Stop_time;
-use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Support\Facades\DB;
 use App\Models\WorkerDataRetrieval;
 use DateTime;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Query\Builder;
 
 class StopDisplayColumnController extends Controller
