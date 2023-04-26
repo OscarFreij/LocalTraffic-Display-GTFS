@@ -26,7 +26,7 @@ class StopDisplayColumnController extends Controller
 
         $masterStop = Stop::find($id);
 
-        $selectionArray = ['stop_times.trip_id','stop_times.arrival_time','stop_times.rt_arrival_time','stop_times.departure_time','stop_times.rt_departure_time','stop_times.stop_id','stop_times.stop_headsign','trips.schedule_relationship as trip_schedule_relationship', 'stop_times.schedule_relationship as stop_time_schedule_relationship', 'trips.serviceAlertCancelled', 'trips.route_id', 'trips.service_id', 'trips.direction_id', 'calendar_dates.date'];
+        $selectionArray = ['stop_times.trip_id','stop_times.arrival_time','stop_times.rt_arrival_time','stop_times.departure_time','stop_times.rt_departure_time','stop_times.stop_id','stop_times.stop_headsign', 'stops.platform_code','trips.schedule_relationship as trip_schedule_relationship', 'stop_times.schedule_relationship as stop_time_schedule_relationship', 'trips.serviceAlertCancelled', 'trips.route_id', 'trips.service_id', 'trips.direction_id', 'calendar_dates.date'];
 
         if ($masterStop->location_type == 0)
         {
@@ -34,6 +34,7 @@ class StopDisplayColumnController extends Controller
                 ->where('stop_times.stop_id', '=', $id)
                 ->join('trips', 'trips.trip_id', '=', 'stop_times.trip_id')
                 ->join('calendar_dates', 'trips.service_id', '=', 'calendar_dates.service_id')
+                ->join('stops', 'stop_times.stop_id', '=', 'stops.stop_id')
                 ->where('calendar_dates.date', '=', date('Ymd'))
                 ->where(function(Builder $query){
                     $timeP24 = (date('H')+24).":".(date('i:s'));
@@ -55,6 +56,7 @@ class StopDisplayColumnController extends Controller
                 ->where('stop_times.stop_id', '=', $id)
                 ->join('trips', 'trips.trip_id', '=', 'stop_times.trip_id')
                 ->join('calendar_dates', 'trips.service_id', '=', 'calendar_dates.service_id')
+                ->join('stops', 'stop_times.stop_id', '=', 'stops.stop_id')
                 ->where('calendar_dates.date', '=', date('Ymd'))
                 ->where(function(Builder $query){
                     $timeP0 = (date('H')).":".(date('i:s'));
@@ -83,6 +85,7 @@ class StopDisplayColumnController extends Controller
                 ->whereIn('stop_times.stop_id', $ids)
                 ->join('trips', 'trips.trip_id', '=', 'stop_times.trip_id')
                 ->join('calendar_dates', 'trips.service_id', '=', 'calendar_dates.service_id')
+                ->join('stops', 'stop_times.stop_id', '=', 'stops.stop_id')
                 ->where('calendar_dates.date', '=', date('Ymd'))
                 ->where(function(Builder $query){
                     $timeP24 = (date('H')+24).":".(date('i:s'));
@@ -104,6 +107,7 @@ class StopDisplayColumnController extends Controller
                 ->whereIn('stop_times.stop_id',  $ids)
                 ->join('trips', 'trips.trip_id', '=', 'stop_times.trip_id')
                 ->join('calendar_dates', 'trips.service_id', '=', 'calendar_dates.service_id')
+                ->join('stops', 'stop_times.stop_id', '=', 'stops.stop_id')
                 ->where('calendar_dates.date', '=', date('Ymd'))
                 ->where(function(Builder $query){
                     $timeP0 = (date('H')).":".(date('i:s'));

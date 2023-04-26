@@ -110,26 +110,29 @@
     
 @endphp
 <div class="statusBox alert pb-3 my-1" data-state="{{$state}}" style="">
-    <div class="statusBox-content flex flex-row text-3xl p-2 bg-zinc-600">
-        <span class="basis-6/12 text-start self-center flex flex-row">
-        <span class="text-start self-center">
-            {{$stop_time->trip->route->route_short_name}}
+    <div class="statusBox-content flex md:flex-row flex-col text-3xl p-2 bg-zinc-600">
+        <span class="md:basis-6/12 basis-full text-start self-center flex flex-row">
+            <span class="text-start self-center">
+                {{$stop_time->trip->route->route_short_name}}
+            </span>
+            <span class="text-start self-center">
+                &nbsp;-&nbsp;
+            </span>
+            <span class="text-start self-center">
+                {{$stop_time->stop_headsign}}
+            </span>
         </span>
-        <span class="text-start self-center">
-            &nbsp;-&nbsp;
+        <span class="md:basis-2/12 basis-full text-center self-center">
+            Track: {{$stop_time->platform_code}}
         </span>
-        <span class="text-start self-center">
-            {{$stop_time->stop_headsign}}
-        </span>
-        </span>
-        <span class="basis-3/12 text-center self-center">
+        <span class="md:basis-2/12 basis-full text-center self-center">
         @if ($state == "ontime")
             <span class="">{{$plannedDepartureTime}}</span>
         @else
             <span class="line-through">{{$plannedDepartureTime}}</span>&nbsp;-&nbsp;<span class="text-red-500">{{$delayedDepartureTime}}</span>
         @endif
         </span>
-        <span class="basis-3/12 text-center self-center">{{$timeDiff}}</span>
+        <span class="md:basis-2/12 basis-full text-center self-center">{{$timeDiff}}</span>
     </div>
 </div>
 @endforeach
