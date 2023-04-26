@@ -122,9 +122,13 @@
                 {{$stop_time->stop_headsign}}
             </span>
         </span>
+        @if(is_numeric($stop_time->platform_code))
         <span class="md:basis-2/12 basis-full text-center self-center">
             Track: {{$stop_time->platform_code}}
         </span>
+        @else
+        <span class="md:basis-2/12 basis-full text-center self-center"></span>
+        @endif
         <span class="md:basis-2/12 basis-full text-center self-center">
         @if ($state == "ontime")
             <span class="">{{$plannedDepartureTime}}</span>
