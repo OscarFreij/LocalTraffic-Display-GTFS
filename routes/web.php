@@ -1,12 +1,14 @@
 <?php
 
-use App\Http\Controllers\AgencyController;
-use App\Http\Controllers\RouteController;
-use App\Http\Controllers\StopController;
-use App\Http\Controllers\StopDisplayColumnController;
-use App\Http\Controllers\TripUpdateController;
-use Illuminate\Support\Facades\Route;
+use App\Models\Screen;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StopController;
+use App\Http\Controllers\RouteController;
+use App\Http\Controllers\AgencyController;
+use App\Http\Controllers\ScreenController;
+use App\Http\Controllers\TripUpdateController;
+use App\Http\Controllers\StopDisplayColumnController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +21,9 @@ use Illuminate\Http\Request;
 |
 */
 
-
-Route::get('/{carousel_data}', function (string $carousel_data) {
-    return view('app', [
-        'carousel_data' => $carousel_data
-    ]);
-});
+Route::resource('/screen', ScreenController::class, [
+    'only' => ['show']
+]);
 
 Route::resource('/displayAPI', StopDisplayColumnController::class, [
     'only' => ['show']

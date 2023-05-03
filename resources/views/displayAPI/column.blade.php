@@ -109,7 +109,7 @@
     }
     
 @endphp
-<div class="statusBox alert pb-3 my-1" data-state="{{$state}}" style="">
+<div class="statusBox alert pb-3" data-state="{{$state}}" style="">
     <div class="statusBox-content flex md:flex-row flex-col text-3xl p-2 bg-zinc-600">
         <span class="md:basis-6/12 basis-full text-start self-center flex flex-row">
             <span class="text-start self-center">
