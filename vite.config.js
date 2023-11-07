@@ -7,9 +7,15 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/css/statusBox.css',
-                'resources/js/app.js'
+                'resources/js/app.js',
+                'resources/js/screen.js'
             ],
             refresh: true,
         }),
     ],
+    server: {
+        hmr: {
+            host: 'localhost',
+        },
+      }
 });

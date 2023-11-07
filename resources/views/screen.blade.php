@@ -18,6 +18,7 @@
   @vite('resources/css/app.css')
   @vite('resources/css/statusBox.css')
   @vite('resources/js/app.js')
+  @vite('resources/js/screen.js')
 </head>
 <body class="text-zinc-50 bg-zinc-700">
   @if (!is_null($screen_data->long_name))
