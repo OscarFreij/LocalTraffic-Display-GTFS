@@ -8,7 +8,9 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/css/statusBox.css',
                 'resources/js/app.js',
-                'resources/js/screen.js'
+                'resources/js/screen.js',
+                'resources/js/screen2x2.js',
+                'resources/css/legend.css'
             ],
             refresh: true,
         }),

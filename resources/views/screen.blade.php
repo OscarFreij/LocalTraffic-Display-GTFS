@@ -27,7 +27,7 @@
   </div>
   @endif
   <div id="data" class="divide-zinc-700 divide-y-4">
-
+    <h1 class="text-center text-4xl">LOADING DATA...</h1>
   </div>
 </body>
 </html>

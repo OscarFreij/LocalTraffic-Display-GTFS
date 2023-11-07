@@ -9,13 +9,14 @@ use Illuminate\Support\Facades\DB;
 use App\Models\WorkerDataRetrieval;
 use DateTime;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Http\Request;
 
 class StopDisplayColumnController extends Controller
 {
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id, ?string $format = '1x1', ?int $max = 8)
     {
         $source_download_data = WorkerDataRetrieval::hydrate(DB::table('workerDataRetrievals')->where('type', '=', '1')->orderByDesc('id')->limit(1)->get()->toArray());
 
@@ -43,7 +44,7 @@ class StopDisplayColumnController extends Controller
                 })
                 ->orderByRaw('ifnull(rt_departure_time, departure_time)')
                 ->select($selectionArray)
-                ->take(8)
+                ->take($max)
                 ->get()
                 ->toArray();
 
@@ -64,7 +65,7 @@ class StopDisplayColumnController extends Controller
                 })
                 ->orderByRaw('ifnull(rt_departure_time, departure_time)')
                 ->select($selectionArray)
-                ->take(8)
+                ->take($max)
                 ->get()
                 ->toArray();
             $stop_times_array = $stop_times_earlyNEW + $stop_times_lateNEW;
@@ -94,7 +95,7 @@ class StopDisplayColumnController extends Controller
                 })
                 ->orderByRaw('ifnull(rt_departure_time, departure_time)')
                 ->select($selectionArray)
-                ->take(8)
+                ->take($max)
                 ->get()
                 ->toArray();
 
@@ -115,7 +116,7 @@ class StopDisplayColumnController extends Controller
                 })
                 ->orderByRaw('ifnull(rt_departure_time, departure_time)')
                 ->select($selectionArray)
-                ->take(8)
+                ->take($max)
                 ->get()
                 ->toArray();
             $stop_times_array = $stop_times_earlyNEW + $stop_times_lateNEW;
@@ -128,10 +129,30 @@ class StopDisplayColumnController extends Controller
 
         $stop_times = Stop_time::hydrate($stop_times_array);
         //dd($stop_times);
-        return view('displayAPI.column' , [
-            'master_stop_data' => $masterStop,
-            'source_download_data' => $source_download_data[0],
-            'stop_times' => $stop_times
-        ]);
+
+        switch ($format) {
+            case '1x1':
+                return view('displayAPI.column' , [
+                    'master_stop_data' => $masterStop,
+                    'source_download_data' => $source_download_data[0],
+                    'stop_times' => $stop_times
+                ]);
+            
+            case '2x2':
+                return view('displayAPI.column2x2' , [
+                    'master_stop_data' => $masterStop,
+                    'source_download_data' => $source_download_data[0],
+                    'stop_times' => $stop_times
+                ]);
+            
+            default:
+                return view('displayAPI.column' , [
+                    'master_stop_data' => $masterStop,
+                    'source_download_data' => $source_download_data[0],
+                    'stop_times' => $stop_times
+                ]);
+        }
+
+        
     }
 }

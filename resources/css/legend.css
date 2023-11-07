@@ -1,0 +1,30 @@
+.legend-color[data-state]
+{
+    background: repeating-linear-gradient(
+        45deg,
+        #000,
+        #000 10px,
+        transparent 10px,
+        transparent 20px
+    );
+}
+
+.legend-color[data-state = "ontime"]
+{
+    background: #00aa00;
+}
+
+.legend-color[data-state = "late"]
+{
+    background: yellow;
+}
+
+.legend-color[data-state = "early"]
+{
+    background: cyan;
+}
+.legend-color[data-state = "cancelled"]
+{
+    background-color: red;
+}
+

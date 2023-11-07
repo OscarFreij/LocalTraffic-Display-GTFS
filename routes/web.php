@@ -7,6 +7,7 @@ use App\Http\Controllers\StopController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\ScreenController;
+use App\Http\Controllers\Screen2x2Controller;
 use App\Http\Controllers\TripUpdateController;
 use App\Http\Controllers\StopDisplayColumnController;
 
@@ -25,6 +26,14 @@ Route::resource('/screen', ScreenController::class, [
     'only' => ['show']
 ]);
 
+Route::resource('/screen2x2', Screen2x2Controller::class, [
+    'only' => ['show']
+]);
+
+/*
 Route::resource('/displayAPI', StopDisplayColumnController::class, [
     'only' => ['show']
 ]);
+*/
+
+Route::get('/displayAPI/{id}/{format?}/{max?}', [StopDisplayColumnController::class, 'show']);
