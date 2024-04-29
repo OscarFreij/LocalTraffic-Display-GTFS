@@ -19,10 +19,24 @@ function LoadNewColumns()
 }
 
 
+function UpdateTime()
+{
+    let date = new Date();
+    let h = date.getHours();
+    let m = date.getMinutes();
+    document.getElementById('clock').childNodes[1].innerHTML = h+":"+m;
+}
+
+
 setInterval(() => {
     LoadNewColumns();
+    UpdateTime();
 }, 10000);
 
 LoadNewColumns();
+UpdateTime();
+
+
+
 
 

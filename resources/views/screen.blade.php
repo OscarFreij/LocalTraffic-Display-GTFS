@@ -21,11 +21,19 @@
   @vite('resources/js/screen.js')
 </head>
 <body class="text-zinc-50 bg-zinc-700">
-  @if (!is_null($screen_data->long_name))
-  <div class="w-full mb-1">
-    <h1 class="text-center text-4xl">{{$screen_data->long_name}}</h1>
+  <div class="flex mt-3 mb-1">
+    <div class="w-1/4" id="clock">
+      <p class="text-start text-3xl ml-5">00:00</p>
+    </div>
+    <div class="w-1/2">
+      @if (!is_null($screen_data->long_name))
+      <h1 class="text-center text-4xl">{{$screen_data->long_name}}</h1>
+      @endif
+    </div>
+    <div class="w-1/4" id="weather">
+      <p class="text-end text-3xl mr-5">Clear</p>
+    </div>
   </div>
-  @endif
   <div id="data" class="divide-zinc-700 divide-y-4">
     <h1 class="text-center text-4xl">LOADING DATA...</h1>
   </div>
