@@ -14,7 +14,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script>var stopQue = {{ Js::from($carousel_data_array) }};</script>
+  <script>
+    var stopQue = {{ Js::from($carousel_data_array) }};
+    var lon = {{ Js::from($screen_data->lon) }};
+    var lat = {{ Js::from($screen_data->lat) }};
+  </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   @vite('resources/css/app.css')
   @vite('resources/css/statusBox.css')
   @vite('resources/js/app.js')
@@ -31,7 +36,7 @@
       @endif
     </div>
     <div class="w-1/4" id="weather">
-      <p class="text-end text-3xl mr-5">Clear</p>
+      <p class="text-end text-3xl mr-5"></p>
     </div>
   </div>
   <div id="data" class="divide-zinc-700 divide-y-4">
