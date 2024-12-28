@@ -1,39 +1,34 @@
 <?php
 
-use App\Models\Screen;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StopController;
-use App\Http\Controllers\RouteController;
-use App\Http\Controllers\AgencyController;
-use App\Http\Controllers\ScreenController;
-use App\Http\Controllers\Screen2x2Controller;
-use App\Http\Controllers\TripUpdateController;
-use App\Http\Controllers\StopDisplayColumnController;
+use App\Http\Controllers\StopsController;
+use App\Http\Controllers\RoutesController;
+use App\Http\Controllers\ProfileController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::resource('/screen', ScreenController::class, [
-    'only' => ['show']
-]);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('/screen2x2', Screen2x2Controller::class, [
-    'only' => ['show']
-]);
+Route::middleware('auth')->group(function () {
 
-/*
-Route::resource('/displayAPI', StopDisplayColumnController::class, [
-    'only' => ['show']
-]);
-*/
+    Route::get('/data', function () {
+        //return view('data.index');
+        abort(404);
+    })->name('data.index');
 
-Route::get('/displayAPI/{id}/{format?}/{max?}', [StopDisplayColumnController::class, 'show']);
+    Route::get('/stops', [StopsController::class, 'index'])->name('data.stops.index');
+    Route::get('/stops/{stop_id}', [StopsController::class, 'show'])->name('data.stops.show');
+
+    Route::get('/routes', [RoutesController::class, 'index'])->name('data.routes.index');
+    Route::get('/routes/{route_id}', [RoutesController::class, 'show'])->name('data.routes.show');
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';

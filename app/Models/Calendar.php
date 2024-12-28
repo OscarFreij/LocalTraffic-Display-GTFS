@@ -2,22 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Trip;
+use App\Models\CalendarDate;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Calendar extends Model
 {
+    /** @use HasFactory<\Database\Factories\CalendarFactory> */
     use HasFactory;
-    protected $table = 'calendar';
-    protected $primaryKey = 'service_id';
 
-    public function trip()
+    function trips()
     {
         return $this->hasMany(Trip::class, 'service_id', 'service_id');
     }
 
-    public function calendar_date()
+    function calendarDates()
     {
-        return $this->hasMany(Calendar_date::class, 'service_id', 'service_id');
+        return $this->hasMany(CalendarDate::class, 'service_id', 'service_id');
     }
 }

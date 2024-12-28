@@ -4,14 +4,7 @@ import laravel from 'laravel-vite-plugin';
 export default defineConfig({
     plugins: [
         laravel({
-            input: [
-                'resources/css/app.css',
-                'resources/css/statusBox.css',
-                'resources/js/app.js',
-                'resources/js/screen.js',
-                'resources/js/screen2x2.js',
-                'resources/css/legend.css'
-            ],
+            input: ['resources/css/app.css', 'resources/js/app.js', 'resources/js/paginate_set_limit.js', 'resources/js/clear_filter.js', 'resources/css/bg_dots.css'],
             refresh: true,
         }),
     ],
@@ -19,5 +12,5 @@ export default defineConfig({
         hmr: {
             host: 'localhost',
         },
-      }
+    }
 });

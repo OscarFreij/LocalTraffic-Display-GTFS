@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreScreenRequest;
+use App\Http\Requests\UpdateScreenRequest;
 use App\Models\Screen;
-use Hamcrest\Type\IsNumeric;
-use Illuminate\Http\Request;
 
 class ScreenController extends Controller
 {
@@ -14,7 +14,6 @@ class ScreenController extends Controller
     public function index()
     {
         //
-        return Screen::all();
     }
 
     /**
@@ -28,7 +27,7 @@ class ScreenController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreScreenRequest $request)
     {
         //
     }
@@ -36,27 +35,15 @@ class ScreenController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Screen $screen)
     {
         //
-        if (is_numeric($id))
-        {
-            return view('screen', [
-                'screen_data' => Screen::findOrFail($id)
-            ]);
-        }
-        else
-        {
-            return view('screen', [
-                'screen_data' => Screen::where('short_name', $id)->firstOrFail()
-            ]);
-        }
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Screen $screen)
     {
         //
     }
@@ -64,7 +51,7 @@ class ScreenController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateScreenRequest $request, Screen $screen)
     {
         //
     }
@@ -72,7 +59,7 @@ class ScreenController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Screen $screen)
     {
         //
     }
