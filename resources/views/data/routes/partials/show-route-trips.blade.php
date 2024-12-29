@@ -33,9 +33,6 @@
                     <th>
                         {{ __('Direction') }}
                     </th>
-                    <th>
-                        {{ __('Cancled') }}
-                    </th>
                 </tr>
             </thead>
             <tbody class="text-gray-600 dark:text-gray-400">
@@ -68,8 +65,12 @@
                                 <span class="text-green dark:text-blue-400">{{ __('Upcoming') }}</span>
                             @elseif ($trip->trip_status == 2)
                                 <span class="text-red-500 dark:text-green-400">{{ __('Completed') }}</span>
-                            @else
+                            @elseif ($trip->trip_status == 1)
                                 <span class="text-yellow-500 dark:text-yellow-400">{{ __('In Progress') }}</span>
+                            @elseif ($trip->trip_status == 3)
+                                <span class="text-red-500 dark:text-red-400">{{ __('Cancelled') }}</span>
+                            @else
+                                <span class="text-gray-500 dark:text-gray-400">{{ __('Unknown') }}</span>
                             @endif
                         </td>
                         <td>
@@ -77,13 +78,6 @@
                                 <span class="text-green dark:text-green-400">{{ __('Outbound') }}</span>
                             @else
                                 <span class="text-blue-500 dark:text-blue-400">{{ __('Inbound') }}</span>
-                            @endif
-                        </td>
-                        <td>
-                            @if ($trip->service_alert_cancled)
-                                <span class="text-red-500 dark:text-red-400">{{ __('Yes') }}</span>
-                            @else
-                                <span class="text-green-500 dark:text-green-400">{{ __('No') }}</span>
                             @endif
                         </td>
                     </tr>

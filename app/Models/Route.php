@@ -157,8 +157,11 @@ class Route extends Model
             $trips_paginated[$i]->trip_last_stop = $trip_last_stop_time->format('Y-m-d H:i:s');
             
             //dump($trip_first_stop_time->format('Y-m-d H:i:s'). " | ". $trip_last_stop_time->format('Y-m-d H:i:s') . " | " . $currentDateTime->format('Y-m-d H:i:s'));
-
-            if ($currentDateTime < $trip_first_stop_time)
+            if ($trips_paginated[$i]->service_alert_cancled)
+            {
+                $trips_paginated[$i]->trip_status = '3'; // Cancelled
+            }
+            else if ($currentDateTime < $trip_first_stop_time)
             {
                 $trips_paginated[$i]->trip_status = '0'; // Upcoming
             }
