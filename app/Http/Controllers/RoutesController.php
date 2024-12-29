@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Route;
+use App\Models\StopTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RoutesController extends Controller
 {
@@ -24,10 +26,10 @@ class RoutesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Int $route_id)
+    public function show(Int $route_id, Request $request)
     {
         //
-        $route = Route::findOrFail($route_id);
+        $route = Route::findOrFail($route_id);       
         return view('data.routes.show', [
             'route' => $route,
         ]);

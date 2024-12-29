@@ -6,6 +6,7 @@ use App\Models\Route;
 use App\Models\Shape;
 use App\Models\Calendar;
 use App\Models\StopTime;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Lacodix\LaravelModelFilter\Traits\HasFilters;
 use Lacodix\LaravelModelFilter\Traits\IsSearchable;

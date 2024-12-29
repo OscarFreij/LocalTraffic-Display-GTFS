@@ -26,6 +26,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/routes', [RoutesController::class, 'index'])->name('data.routes.index');
     Route::get('/routes/{route_id}', [RoutesController::class, 'show'])->name('data.routes.show');
 
+    Route::get('/trips/{trip_id}', function () {
+        abort(404);
+    })->name('data.trips.show');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
