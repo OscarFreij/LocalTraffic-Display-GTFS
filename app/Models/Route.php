@@ -76,7 +76,13 @@ class Route extends Model
         
         $trips_paginated = $this->trips()->orderBy('trip_id', 'asc')->paginate(request()->get('limit', 10))->withQueryString();
         $stop_times_first = StopTime::whereIn('trip_id', $trips_paginated->pluck('trip_id'))->orderBy('trip_id', 'asc')->where('stop_sequence', '=', 1)->get();
-        $stop_times_last = StopTime::whereIn('trip_id', $trips_paginated->pluck('trip_id'))->orderBy('trip_id', 'asc')->orderBy('stop_sequence', 'desc')->distinct('trip_id')->get();
+        //$stop_times_last = StopTime::whereIn('trip_id', $trips_paginated->pluck('trip_id'))->orderBy('trip_id', 'asc')->orderBy('stop_sequence', 'desc')->distinct('trip_id')->get();
+        $stop_times_last = StopTime::whereIn('trip_id', $trips_paginated->pluck('trip_id'))
+            ->orderBy('trip_id', 'asc')
+            ->orderBy('stop_sequence', 'desc')
+            ->get()
+            ->unique('trip_id')
+            ->values();
 
         $wdr = WorkerDataRetrievals::where('type', '=', '1')->orderBy('timestamp', 'desc')->first();
 
@@ -84,15 +90,15 @@ class Route extends Model
 
         for ($i = 0; $i < count($stop_times_first); $i++) {
             $trips_paginated[$i]->trip_headsign = $stop_times_first[$i]->stop_headsign;
-            $trips_paginated[$i]->trip_first_stop = $stop_times_first[$i]->arrival_time;
-            $trips_paginated[$i]->trip_last_stop = $stop_times_last[$i]->arrival_time;
 
-
-            $hours_to_add = substr($trips_paginated[$i]->trip_first_stop, 0, 2);
-            $minutes_to_add = substr($trips_paginated[$i]->trip_first_stop, 3, 2);
-            $seconds_to_add = substr($trips_paginated[$i]->trip_first_stop, 6, 2);
+            $hours_to_add = substr($stop_times_first[$i]->arrival_time, 0, 2);
+            $minutes_to_add = substr($stop_times_first[$i]->arrival_time, 3, 2);
+            $seconds_to_add = substr($stop_times_first[$i]->arrival_time, 6, 2);
             
-            $trip_first_stop_time = DateTime::createFromFormat('Y-m-d H:i:s', $wdr->timestamp);;
+            $DT = new DateTime($wdr->timestamp);
+            $DT->setTime(0,0,0,0);
+
+            $trip_first_stop_time = DateTime::createFromFormat('Y-m-d H:i:s', $DT->format('Y-m-d H:i:s'));
             if ($hours_to_add > 0)
             {
                 if ($hours_to_add >= 24)
@@ -117,12 +123,13 @@ class Route extends Model
                 $trip_first_stop_time->add(new DateInterval($DIString));
             }
 
+            $trips_paginated[$i]->trip_first_stop = $trip_first_stop_time->format('Y-m-d H:i:s');
 
-            $hours_to_add = substr($trips_paginated[$i]->trip_last_stop, 0, 2);
-            $minutes_to_add = substr($trips_paginated[$i]->trip_last_stop, 3, 2);
-            $seconds_to_add = substr($trips_paginated[$i]->trip_last_stop, 6, 2);
+            $hours_to_add = substr($stop_times_last[$i]->arrival_time, 0, 2);
+            $minutes_to_add = substr($stop_times_last[$i]->arrival_time, 3, 2);
+            $seconds_to_add = substr($stop_times_last[$i]->arrival_time, 6, 2);
 
-            $trip_last_stop_time = DateTime::createFromFormat('Y-m-d H:i:s', $wdr->timestamp);
+            $trip_last_stop_time = DateTime::createFromFormat('Y-m-d H:i:s', $DT->format('Y-m-d H:i:s'));
             if ($hours_to_add > 0)
             {
                 if ($hours_to_add >= 24)
@@ -147,10 +154,8 @@ class Route extends Model
                 $trip_last_stop_time->add(new DateInterval($DIString));
             }
             
+            $trips_paginated[$i]->trip_last_stop = $trip_last_stop_time->format('Y-m-d H:i:s');
             
-            //$trip_first_stop_time = DateTime::createFromFormat('H:i:s', strtotime($trips_paginated[$i]->trip_first_stop, $wdrDateTime->getTimestamp()));
-            //$trip_last_stop_time = DateTime::createFromFormat('H:i:s', strtotime($trips_paginated[$i]->trip_last_stop, $wdrDateTime->getTimestamp()));
-
             //dump($trip_first_stop_time->format('Y-m-d H:i:s'). " | ". $trip_last_stop_time->format('Y-m-d H:i:s') . " | " . $currentDateTime->format('Y-m-d H:i:s'));
 
             if ($currentDateTime < $trip_first_stop_time)
