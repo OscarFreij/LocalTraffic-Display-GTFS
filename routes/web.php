@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StopsController;
+use App\Http\Controllers\TripsController;
 use App\Http\Controllers\RoutesController;
 use App\Http\Controllers\ProfileController;
 
@@ -26,9 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/routes', [RoutesController::class, 'index'])->name('data.routes.index');
     Route::get('/routes/{route_id}', [RoutesController::class, 'show'])->name('data.routes.show');
 
-    Route::get('/trips/{trip_id}', function () {
-        abort(404);
-    })->name('data.trips.show');
+    Route::get('/trips/{trip_id}', [TripsController::class, 'show'])->name('data.trips.show');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
