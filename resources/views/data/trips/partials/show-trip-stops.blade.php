@@ -39,9 +39,8 @@
                         {{ $stop_time->stop->stop_name }}
                     </td>
                     <td>
-                        
                         @if (!is_null($stop_time->rt_arrival_time))
-                        <span>{{ $stop_time->arrivalTimeFormated() }}</span>
+                        <span class="line-through">{{ $stop_time->arrivalTimeFormated() }}</span>
                         <br>
                         <span>{{ $stop_time->arrivalTimeRTFormated() }}</span>
                         @else
@@ -50,7 +49,7 @@
                     </td>
                     <td>
                         @if (!is_null($stop_time->rt_departure_time))
-                        <span>{{ $stop_time->departureTimeFormated() }}</span>
+                        <span class="line-through">{{ $stop_time->departureTimeFormated() }}</span>
                         <br>
                         <span>{{ $stop_time->departureTimeRTFormated() }}</span>
                         @else
@@ -66,7 +65,7 @@
                             <span class="text-green dark:text-blue-400">{{ __('Early') }}</span>
                                 @break
                             @case(2)
-                            <span class="text-yellow-500 dark:text-yellow-400">{{ __('In Progress') }}</span>
+                            <span class="text-yellow-500 dark:text-yellow-400">{{ __('Late') }}</span>
                                 @break
                             @case(3)
                             <span class="text-red-500 dark:text-red-400">{{ __('Cancelled') }}</span>

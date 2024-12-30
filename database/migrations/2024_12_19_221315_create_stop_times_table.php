@@ -25,8 +25,8 @@ return new class extends Migration
             $table->integer('drop_off_type');
             $table->text('shape_dist_traveled');
             $table->integer('timepoint');
-            $table->timestamp('rt_arrival_time')->nullable();
-            $table->timestamp('rt_departure_time')->nullable();
+            $table->time('rt_arrival_time')->nullable();
+            $table->time('rt_departure_time')->nullable();
             $table->integer('schedule_relationship')->nullable();
         });
     }

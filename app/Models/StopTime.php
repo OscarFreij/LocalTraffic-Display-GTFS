@@ -6,6 +6,7 @@ use DateTime;
 use DateInterval;
 use App\Models\Stop;
 use App\Models\Trip;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -30,7 +31,7 @@ class StopTime extends Model
         return $this->parseGTFSTimestamp($this->arrival_time, $wdr->timestamp);
     }
 
-    function arrivalTimeRTFormatedRT()
+    function arrivalTimeRTFormated()
     {
         $wdr = WorkerDataRetrievals::where('type', '=', '1')->orderBy('timestamp', 'desc')->first();
         return $this->parseGTFSTimestamp($this->rt_arrival_time, $wdr->timestamp);
@@ -55,9 +56,9 @@ class StopTime extends Model
             return null;
         }
 
-        $hours_to_add = substr($timestamp, 0, 2);
-        $minutes_to_add = substr($timestamp, 3, 2);
-        $seconds_to_add = substr($timestamp, 6, 2);
+        $hours_to_add = (int)substr($timestamp, 0, 2);
+        $minutes_to_add = (int)substr($timestamp, 3, 2);
+        $seconds_to_add = (int)substr($timestamp, 6, 2);
 
         $DT = new DateTime($baseTimestamp);
         $DT->setTime(0,0,0,0);
@@ -80,6 +81,7 @@ class StopTime extends Model
         {
             $DIString = 'PT'.$minutes_to_add.'M';
             $ts->add(new DateInterval($DIString));
+            
         }
         if ($seconds_to_add > 0)
         {
