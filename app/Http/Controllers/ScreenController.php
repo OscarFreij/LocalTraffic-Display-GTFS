@@ -46,7 +46,7 @@ class ScreenController extends Controller
         $newScreen->longitude = $request->longitude;
         $newScreen->latitude = $request->latitude;
         $newScreen->timezone = $request->timezone;
-        $newScreen->stop_queue = $request->stop_queue;
+        $newScreen->stop_queue = json_decode($request->stop_queue);
         $newScreen->user_id = Auth::user()->id;
         $newScreen->save();
 
