@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StopsController;
 use App\Http\Controllers\TripsController;
 use App\Http\Controllers\RoutesController;
+use App\Http\Controllers\ScreenController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
@@ -28,6 +29,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/routes/{route_id}', [RoutesController::class, 'show'])->name('data.routes.show');
 
     Route::get('/trips/{trip_id}', [TripsController::class, 'show'])->name('data.trips.show');
+
+    Route::get('/screens', [ScreenController::class, 'index'])->name('screens.index');
+    Route::get('/screens/create', [ScreenController::class, 'create'])->name('screens.create');
+    Route::post('/screens/create', [ScreenController::class, 'store'])->name('screens.store');
+    Route::get('/screens/edit/{screen_id}', [ScreenController::class, 'edit'])->name('screens.edit');
+    Route::patch('/screens/edit/{screen_id}', [ScreenController::class, 'update'])->name('screens.update');
+    Route::get('/screens/{screen_id}', [ScreenController::class, 'show'])->name('screens.show');
+    Route::delete('/screens/{screen_id}', [ScreenController::class, 'destroy'])->name('screens.destroy');
+    
+    
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Screen;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateScreenRequest extends FormRequest
@@ -11,7 +13,7 @@ class UpdateScreenRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,11 @@ class UpdateScreenRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'long_name' => [
+                'string',
+                'required',
+                Rule::unique(Screen::class)->ignore($this->id)],
+            'timezone' => 'int|required|max:12|min:-12'
         ];
     }
 }

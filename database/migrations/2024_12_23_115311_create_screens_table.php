@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('screens', function (Blueprint $table) {
             $table->id();
-            $table->string('short_name', 16);
+            $table->string('short_name', 36);
             $table->string('long_name');
             $table->string('description')->nullable();
-            $table->text('stop_que');
-            $table->string('longitude', 16);
-            $table->string('latitude', 16);
+            $table->text('stop_queue')->nullable();
+            $table->string('longitude', 16)->nullable();
+            $table->string('latitude', 16)->nullable();
             $table->string('timezone', 64);
             $table->foreignIdFor(App\Models\User::class)->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

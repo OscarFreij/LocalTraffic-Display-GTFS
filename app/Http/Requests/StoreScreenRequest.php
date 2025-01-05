@@ -11,7 +11,7 @@ class StoreScreenRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class StoreScreenRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'long_name' => 'string|required|unique:screens',
+            'timezone' => 'int|required|max:12|min:-12'
         ];
     }
 }
