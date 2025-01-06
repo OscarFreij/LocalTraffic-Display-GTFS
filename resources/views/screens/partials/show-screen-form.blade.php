@@ -12,27 +12,34 @@
         <div>
             <x-input-label for="long_name" :value="__('Name')" />
             <x-text-input id="long_name" name="long_name" type="text" class="mt-1 block w-full" value="{{ $screen->long_name }}" disabled/>
-            <x-input-error class="mt-2" :messages="$errors->get('long_name')" />
+        </div>
+        <div>
+            <x-input-label for="short_name" :value="__('Display UUID')" />
+            <x-text-input id="short_name" name="short_name" type="text" class="mt-1 block w-full" value="{{ $screen->short_name }}" disabled/>
+        </div>
+        <div>
+            <x-input-label for="short_name_2" :value="__('Display Link')" />
+            <x-text-input id="short_name_2" name="short_name_2" type="text" class="mt-1 block w-full" value="{{ route('api.screen.display', ['screen_uuid' => $screen->short_name]) }}" disabled/>
         </div>
         <div>
             <x-input-label for="description" :value="__('Description')" />
             <textarea id="description" name="description" rows="4" class='mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm' disabled>{{ $screen->description }}</textarea>
-            <x-input-error class="mt-2" :messages="$errors->get('description')" />
         </div>
         <div>
             <x-input-label for="longitude" :value="__('Longitude')" />
             <x-text-input id="longitude" name="longitude" type="number" class="mt-1 block w-full" value="{{ $screen->longitude }}" disabled/>
-            <x-input-error class="mt-2" :messages="$errors->get('longitude')" />
         </div>
         <div>
             <x-input-label for="latitude" :value="__('Latitude')" />
             <x-text-input id="latitude" name="latitude" type="number" class="mt-1 block w-full" value="{{ $screen->latitude }}" disabled/>
-            <x-input-error class="mt-2" :messages="$errors->get('latitude')" />
+        </div>
+        <div>
+            <x-input-label for="time_per_stop" :value="__('Time per stop (Display time in seconds)')" />
+            <x-text-input id="time_per_stop" name="time_per_stop" type="text" class="mt-1 block w-full" value="{{ $screen->time_per_stop }} s" disabled/>
         </div>
         <div>
             <x-input-label for="timezone" :value="__('Timezone')" />
             <x-text-input id="timezone" name="timezone" type="number" min="-12" max="12" step="1" class="mt-1 block w-full" value="{{ $screen->timezone }}" disabled/>
-            <x-input-error class="mt-2" :messages="$errors->get('timezone')" />
         </div>
 
         <div>

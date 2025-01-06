@@ -34,6 +34,11 @@
             <x-input-error class="mt-2" :messages="$errors->get('latitude')" />
         </div>
         <div>
+            <x-input-label for="time_per_stop" :value="__('Time per stop (Display time in seconds)')" />
+            <x-text-input id="time_per_stop" name="time_per_stop" type="number" min="1" step="1" class="mt-1 block w-full" :value="old('time_per_stop', 5)" required autocomplete="time_per_stop" />
+            <x-input-error class="mt-2" :messages="$errors->get('time_per_stop')" />
+        </div>
+        <div>
             <x-input-label for="timezone" :value="__('Timezone')" />
             <x-text-input id="timezone" name="timezone" type="number" min="-12" max="12" step="1" class="mt-1 block w-full" :value="old('timezone', 0)" required autocomplete="timezone" />
             <x-input-error class="mt-2" :messages="$errors->get('timezone')" />

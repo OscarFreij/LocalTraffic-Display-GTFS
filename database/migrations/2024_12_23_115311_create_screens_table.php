@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('long_name');
             $table->string('description')->nullable();
             $table->text('stop_queue')->nullable();
+            $table->integer('time_per_stop')->default(5);
             $table->string('longitude', 16)->nullable();
             $table->string('latitude', 16)->nullable();
             $table->string('timezone', 64);
