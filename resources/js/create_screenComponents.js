@@ -29,14 +29,15 @@ function ReadComponents() {
     for (let i = 0; i < rows.length; i++) {
         const row = rows[i];
         let numericInputs = row.getElementsByTagName('input');
-        let enableSelectionInput = row.getElementsByTagName('select')[0];
+        let selectionInputs = row.getElementsByTagName('select');
 
         let obj = new Object;
         if (numericInputs[0].value != "")
         {
             obj.stop_id = numericInputs[0].value;
             obj.travle_time = numericInputs[1].value;
-            obj.enabled = enableSelectionInput.value;
+            obj.combine_children = selectionInputs[0].value;
+            obj.enabled = selectionInputs[1].value;
             obj.order = numericInputs[2].value;
             objs.push(obj);
         }
