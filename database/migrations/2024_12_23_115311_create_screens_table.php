@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('longitude', 16)->nullable();
             $table->string('latitude', 16)->nullable();
             $table->string('timezone', 64);
+            $table->boolean('enabled')->default(true);
             $table->foreignIdFor(App\Models\User::class)->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
