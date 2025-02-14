@@ -23,7 +23,7 @@
         @endisset
 
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased overflow-hidden">
         <div class="min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900">
             <!-- Page Heading -->
             @isset($header)
