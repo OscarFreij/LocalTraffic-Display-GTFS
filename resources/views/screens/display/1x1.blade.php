@@ -1,4 +1,8 @@
 <x-display-layout>
+    <x-slot name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale={{ $scale }}, user-scalable=0">
+    </x-slot>
+    
     <x-slot name="head">
         
     </x-slot>
