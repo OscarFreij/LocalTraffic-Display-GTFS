@@ -31,6 +31,16 @@ class Route extends Model
 
     protected $primaryKey = 'route_id';
 
+    protected $casts = [
+        'route_id' => 'string',
+        'agency_id' => 'string',
+        'route_short_name' => 'string',
+        'route_long_name' => 'string',
+        'route_desc' => 'string',
+        'route_type' => 'string',
+    ];
+
+
     function agency()
     {
         return $this->belongsTo(Agency::class, 'agency_id', 'agency_id');

@@ -8,10 +8,7 @@ use App\Models\Route;
 use App\Models\Shape;
 use App\Models\Calendar;
 use App\Models\StopTime;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
-use Lacodix\LaravelModelFilter\Traits\HasFilters;
-use Lacodix\LaravelModelFilter\Traits\IsSearchable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Trip extends Model
@@ -19,8 +16,7 @@ class Trip extends Model
     /** @use HasFactory<\Database\Factories\TripFactory> */
     use HasFactory;
 
-    protected $primaryKey = 'trip_id';
-
+    protected $primaryKey = 'trip_id';   
 
     function route()
     {

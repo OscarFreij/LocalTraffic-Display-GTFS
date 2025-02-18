@@ -95,7 +95,6 @@ function generateDepartureRow($departure) {
     let $departureDate = new Date();
     let $tempDepartureDateArray = $departure.departure_time.split(':');
     $departureDate.setHours($tempDepartureDateArray[0], $tempDepartureDateArray[1], $tempDepartureDateArray[2])
-
     switch ($departure.status) {
       case 0: // On time
         $row = document.getElementsByName('template_row_onTime')[0].childNodes[1].cloneNode(true);
@@ -104,6 +103,8 @@ function generateDepartureRow($departure) {
         $row.getElementsByTagName('p')[2].innerHTML = Math.round((($departureDate - $now) / 1000) / 60) + " min";
         break;
       case 1: // Early
+        $tempDepartureDateArray = $departure.rt_departure_time.split(':');
+        $departureDate.setHours($tempDepartureDateArray[0], $tempDepartureDateArray[1], $tempDepartureDateArray[2])
         $row = document.getElementsByName('template_row_early')[0].childNodes[1].cloneNode(true);
         $row.getElementsByTagName('p')[0].innerHTML = ($departure.trip.route.route_short_name + "&nbsp;:&nbsp;" + $departure.stop_headsign);
         $row.getElementsByTagName('p')[1].getElementsByTagName('span')[0].innerHTML = ($departure.departure_time);
@@ -111,6 +112,8 @@ function generateDepartureRow($departure) {
         $row.getElementsByTagName('p')[2].innerHTML = Math.round((($departureDate - $now) / 1000) / 60) + " min";
         break;
       case 2: // Delayed
+        $tempDepartureDateArray = $departure.rt_departure_time.split(':');
+        $departureDate.setHours($tempDepartureDateArray[0], $tempDepartureDateArray[1], $tempDepartureDateArray[2])
         $row = document.getElementsByName('template_row_late')[0].childNodes[1].cloneNode(true);
         $row.getElementsByTagName('p')[0].innerHTML = ($departure.trip.route.route_short_name + "&nbsp;:&nbsp;" + $departure.stop_headsign);
         $row.getElementsByTagName('p')[1].getElementsByTagName('span')[0].innerHTML = ($departure.departure_time);

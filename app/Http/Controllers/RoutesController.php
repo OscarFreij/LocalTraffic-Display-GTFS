@@ -26,8 +26,9 @@ class RoutesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Int $route_id, Request $request)
+    public function show(string $route_id, Request $request)
     {
+        
         //
         $route = Route::findOrFail($route_id);       
         return view('data.routes.show', [

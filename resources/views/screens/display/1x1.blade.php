@@ -46,7 +46,7 @@
     <div class="hidden" name="template_row_late">
         <div class="pb-3 pt-3 w-full">
             <div class="mx-auto sm:px-6 lg:px-8 space-y-6">
-                <div class="pl-4 sm:pl-8 bg-green-800 shadow sm:rounded-lg">
+                <div class="pl-4 sm:pl-8 bg-yellow-800 shadow sm:rounded-lg">
                     <div class="py-4 sm:py-8 pl-4 sm:pl-8 pr-8 sm:pr-16 bg-white dark:bg-gray-800 sm:rounded-lg sm:rounded-s-none">
                         <div class="max-w-auto grid sm:grid-cols-3 grid-cols-2 sm:grid-rows-1 grid-rows-2 font-semibold text-xl text-start text-gray-800 dark:text-gray-200 leading-tight">
                             <p class="text-start sm:col-span-1 col-span-2 row-span-1">#ROUTE_NUMBER# : #TRIP_DESTINATION#</p>
@@ -61,7 +61,7 @@
     <div class="hidden" name="template_row_cancelled">
         <div class="pb-3 pt-3 w-full">
             <div class="mx-auto sm:px-6 lg:px-8 space-y-6">
-                <div class="pl-4 sm:pl-8 bg-green-800 shadow sm:rounded-lg">
+                <div class="pl-4 sm:pl-8 bg-red-800 shadow sm:rounded-lg">
                     <div class="py-4 sm:py-8 pl-4 sm:pl-8 pr-8 sm:pr-16 bg-white dark:bg-gray-800 sm:rounded-lg sm:rounded-s-none">
                         <div class="max-w-auto grid sm:grid-cols-3 grid-cols-2 sm:grid-rows-1 grid-rows-2 font-semibold text-xl text-start text-gray-800 dark:text-gray-200 leading-tight">
                             <p class="text-start sm:col-span-1 col-span-2 row-span-1">#ROUTE_NUMBER# : #TRIP_DESTINATION#</p>
