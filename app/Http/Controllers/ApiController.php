@@ -94,6 +94,10 @@ class ApiController extends Controller
                     ->orWhere('rt_departure_time', '>=', $diffAsTime);
                 })
             ->orderBy('departure_time', 'asc')
+            ->with('trip')
+            ->whereHas('trip.calendar.calendarDates', function($query) use($targetDateTime) {
+                $query->where('date', '=', $targetDateTime->format('Y-m-d'))->where('exception_type', '!=', '2');
+            })
             ->take(12)->with('trip.route:route_id,route_short_name')->get();
 
             foreach ($stop_times as $stop_time) {
@@ -115,6 +119,10 @@ class ApiController extends Controller
                     ->orWhere('rt_departure_time', '>=', $diffAsTime);
                 })
             ->orderBy('departure_time', 'asc')
+            ->with('trip')
+            ->whereHas('trip.calendar.calendarDates', function($query) use($targetDateTime) {
+                $query->where('date', '=', $targetDateTime->format('Y-m-d'))->where('exception_type', '!=', '2');
+            })
             ->take(12)->with('trip.route:route_id,route_short_name')->get();
 
             foreach ($subStop_times as $stop_time) {
