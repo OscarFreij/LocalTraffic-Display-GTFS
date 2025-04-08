@@ -19,6 +19,8 @@ class ApiController extends Controller
     function Display(Request $request, String $screen_uuid)
     {
         $scale = $request->get('scale', 1);
+        $size = $request->get('size', "medium");
+        $grid = $request->get('grid', "1x1");
 
         $screen = Screen::where('short_name', '=', $screen_uuid)->first();
         if (is_null($screen))
@@ -31,7 +33,7 @@ class ApiController extends Controller
         }
         else
         {
-            return view('screens.display.1x1', [
+            return view("screens.display.$grid.$size", [
                 'screen' => $screen,
                 'scale' => $scale
             ]);

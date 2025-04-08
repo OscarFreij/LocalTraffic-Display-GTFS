@@ -81,7 +81,7 @@
         <div class="pb-3 pt-3 w-full">
             <div class="mx-auto sm:px-6 lg:px-8 space-y-6">
                 <div class="pl-4 sm:pl-8 bg-cyan-800 shadow sm:rounded-lg">
-                    <div class="py-4 sm:py-8 pl-4 sm:pl-8 pr-8 sm:pr-16 bg-white dark:bg-gray-800 sm:rounded-lg h-50">
+                    <div class="py-4 sm:py-8 pl-4 sm:pl-8 pr-8 sm:pr-16 bg-white dark:bg-gray-800 sm:rounded-lg sm:rounded-s-none h-50">
                         <div class="max-w-auto grid sm:grid-cols-3 grid-cols-2 sm:grid-rows-1 grid-rows-2 font-semibold text-xl 2xl:text-8xl text-start text-gray-800 dark:text-gray-200 leading-tight">
                             <p class="text-start sm:col-span-1 col-span-2 row-span-1">#ROUTE_NUMBER# : #TRIP_DESTINATION#</p>
                             <p class="sm:text-center text-start"><span class="text-cyan-500 line-through">#STOP_TIME#</span> > <span>#RT_STOP_TIME#</span></p>
